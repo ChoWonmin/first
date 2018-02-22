@@ -1,0 +1,27 @@
+*{
+    box-sizing: border-box;
+}
+body{
+ background-color: #fefefe;
+}
+.header{
+    width: 100%;
+    height: 64px;
+    background-color: #fff;
+    border-bottom: #efefef 0.8px solid;
+    font-size: 12px;
+    top: 0;
+    position: fixed;
+    z-index: 671;
+}
+.header .logo{
+    position: relative;
+}
+.header .search{
+    height: 56px;
+    width: 40%;
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: #eeeeee;
+    border-radius: 4px;
+}

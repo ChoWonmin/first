@@ -1,0 +1,24 @@
+extends layout
+block content
+    script(src='/jquery/dist/jquery.min.js')
+    script(src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js")
+
+    link(href='/stylesheets/main.css' , rel='stylesheet')
+
+    .nav
+    .main-page
+        .mds.cell
+            svg.zone#mds
+        .subview
+            .radar.cell
+                .zone
+            .webtoon-infos
+                .webtoon-list.cell
+                    .zone
+                .color-list.cell
+                    .zone
+
+
+    script(src='/firebase.wrapper.js')
+    script(src='/util.js')
+    script(src='/visualization.mds.js')

@@ -1,0 +1,38 @@
+extends layout
+block content
+  script(src='/jquery/dist/jquery.min.js')
+  script(src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js")
+  link(rel='stylesheet', href='/stylesheets/webtoon.css')
+
+  .main-page
+    .header
+      .logo.inline-block
+      .material-icons.md-48 tag faces
+      .search.inline-block
+      .sort.inline-block
+
+    .main.container.padding-header
+      .mds-wrap
+        svg.mds-map.inline-block
+        .compareList.inline-block
+
+      .webtoonList.inline-block
+
+      .webtoonItem
+
+  .episode-page
+    .back-btn.inline-block
+      i.material-icons.md-48.inline-block keyboard_arrow_left
+
+    .episode.container
+      .episodeList
+      .pageList
+
+
+
+  script(src='/firebase.wrapper.js')
+  script(src='/webtoon.js')
+  script(src='/paging.js')
+
+
+

@@ -1,0 +1,46 @@
+body
+  padding : 0
+  margin : 0
+
+*
+  box-sizing: border-box
+
+$nav-height : 40px
+$radar-size : 350px
+
+.cell
+  padding : 8px
+.zone
+  width : 100%
+  height : 100%
+  border : solid 1px #aaa
+
+.nav
+  height : $nav-height
+
+.main-page
+  height : calc(100vh - #{$nav-height})
+  display : flex
+
+  .mds
+    flex: 1
+    height : 100%
+
+  .subview
+    width : $radar-size
+    height : 100%
+    .radar
+      height : $radar-size
+    .webtoon-infos
+      height : calc(100% - #{$radar-size})
+      display: flex
+      .webtoon-list
+        height : 100%
+        flex: 1
+      .color-list
+        height : 100%
+        flex: 1
+
+
+
+
