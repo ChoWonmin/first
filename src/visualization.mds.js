@@ -48,6 +48,7 @@ const MDS = new function () {
 
     this.drawNode = async function () {
         const webtoonList = (await Firebase.getInfo('/result')).val();
+        //const webtoonList = Util.loadJson('data/webtoon.json')['result2'];
 
         _.forEach(webtoonList, (webtoon, k) => {
             let xs = [] , ys = []
@@ -104,7 +105,6 @@ const MDS = new function () {
 
 
         that.drawAxis();
-
 
         that.drawNode();
         

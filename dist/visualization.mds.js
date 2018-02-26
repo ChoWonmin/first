@@ -49,6 +49,7 @@ var MDS = new function () {
                     case 2:
                         webtoonList = _context.sent.val();
 
+                        //const webtoonList = Util.loadJson('data/webtoon.json')['result2'];
 
                         _.forEach(webtoonList, function (webtoon, k) {
                             var xs = [],
