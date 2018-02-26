@@ -66,9 +66,14 @@ const MDS = new function () {
 
                 _.forEach(_.drop(episode, 1), color =>{
                     const axis = axises[color.image];
-                    x += (axis.x - width / 2) * color['tf-idf'] / tfidfEpisode;
+
+                    x += (axis.x - width / 2) * (color['tf-idf'] / tfidfEpisode);
                     y += (axis.y - height / 2) * color['tf-idf'] / tfidfEpisode;
                 });
+
+// 제곱
+// 플로킹 floking
+
 
                 root.append('circle')
                     .attr('cx', x)

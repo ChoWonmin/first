@@ -66,9 +66,14 @@ var MDS = new function () {
 
                                 _.forEach(_.drop(episode, 1), function (color) {
                                     var axis = axises[color.image];
-                                    x += (axis.x - width / 2) * color['tf-idf'] / tfidfEpisode;
+
+                                    x += (axis.x - width / 2) * (color['tf-idf'] / tfidfEpisode);
                                     y += (axis.y - height / 2) * color['tf-idf'] / tfidfEpisode;
                                 });
+
+                                // 제곱
+                                // 플로킹 floking
+
 
                                 root.append('circle').attr('cx', x).attr('cy', y).attr('fill', color).attr('stroke', 'none').attr('r', 2).attr('opacity', 0.2);
                                 xs.push(x);
