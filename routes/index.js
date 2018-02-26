@@ -18,4 +18,10 @@ router.get('/format', function (req, res, next) {
    res.render('format');
 });
 
+router.get('/test02', function (req, res, next) {
+    res.render('test02');
+});
+
+
+
 module.exports = router;

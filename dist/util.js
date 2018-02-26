@@ -59,9 +59,30 @@ var Util = new function () {
         };
     }();
 
-    this.loadJson = function (url) {
-        return $.get(url);
-    };
+    this.loadJson = function () {
+        var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(url) {
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                    switch (_context3.prev = _context3.next) {
+                        case 0:
+                            _context3.next = 2;
+                            return $.get(url);
+
+                        case 2:
+                            return _context3.abrupt("return", _context3.sent);
+
+                        case 3:
+                        case "end":
+                            return _context3.stop();
+                    }
+                }
+            }, _callee3, _this);
+        }));
+
+        return function (_x3) {
+            return _ref3.apply(this, arguments);
+        };
+    }();
 
     // Promise
 }();

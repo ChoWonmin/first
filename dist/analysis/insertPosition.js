@@ -28,8 +28,6 @@ _.forEach(webtoonList, function (webtoon, webtoonId) {
         var x = origin.x;
         var y = origin.y;
 
-        var tmp = 0;
-
         _.forEach(episodeValue, function (coloring) {
             x += (coloring['x'] - origin.x) * (coloring['tf-idf'] / episodeTfidf);
             y += (coloring['y'] - origin.y) * (coloring['tf-idf'] / episodeTfidf);
@@ -47,6 +45,4 @@ _.forEach(webtoonList, function (webtoon, webtoonId) {
     res[webtoonId]['y'] = _.mean(ys);
 });
 
-//console.log(webtoonList['steelrain2'][0]);
-//console.log(res['steelrain2']['episodes'][0]);
 jsonfile.writeFileSync(destFile, res);
