@@ -14,6 +14,9 @@ const MDS = new function () {
         y: 1,
     };
     let axises = {};
+    let ele = {};
+
+
 
     this.drawAxis = function () {
         _.forEach(axisData, axis => {
@@ -46,38 +49,57 @@ const MDS = new function () {
 
     };
 
-    this.drawNode = async function () {
-        const webtoonList = await (Util.loadJson('data/webtoon-result.json'));
+    this.drawNode = function () {
+        const webtoonList = Util.loadJson('data/webtoon-result.json');
 
+        let eleEpisodes = {};
         console.log(webtoonList);
 
-        _.forEach(webtoonList, (webtoon, k) => {
+        const eleWebtoons = _.map(webtoonList, webtoon => {
             const color = d3.rgb(Math.random() * 150 + 50,
                 Math.random() * 150 + 50,
                 Math.random() * 150 + 50);
 
-            console.log(webtoon['episodes']);
+            eleEpisodes[webtoon['webtoon_title_en']] = _.map(webtoon['episodes'], episode => {
 
-            _.forEach(webtoon['episodes'], episode => {
-
-                root.append('circle')
+                 return root.append('circle')
                     .attr('cx', episode['x'] * ratio.x)
                     .attr('cy', episode['y'] * ratio.y)
                     .attr('fill', color)
                     .attr('stroke', 'none')
                     .attr('r', 2)
-                    .attr('opacity',0.2);
+                    .attr('opacity',0.2)
+                    .attr('webtoon', webtoon['webtoon_title_en']);
                 });
 
-            root.append('circle')
+            return root.append('circle')
                 .attr('cx', webtoon['x'] * ratio.x)
                 .attr('cy', webtoon['y'] * ratio.y)
                 .attr('fill', color)
                 .attr('stroke', 'none')
-                .attr('r', 5);
-
+                .attr('r', 5)
+                .attr('webtoon', webtoon['webtoon_title_en']);
         });
 
+        ele = {'webtoon' : eleWebtoons , 'episode' : eleEpisodes};
+
+        console.log('ele' , ele);
+
+    };
+
+    this.addShowEpisodeAction = function (source , dest) {
+
+        let tmp = $('tmp' , '#svg');
+        console.log('tmp' , tmp);
+
+        /*
+        source.hover(function () {
+            console.log('aaaa');
+            dest.attr('opacity',1);
+        },function () {
+            dest.attr('opacity',0.2);
+        });
+        */
     };
 
     this.init = async function () {
@@ -95,6 +117,8 @@ const MDS = new function () {
         that.drawAxis();
 
         that.drawNode();
+
+        that.addShowEpisodeAction(ele['webtoon'] , ele['episode']);
 
     };
 };

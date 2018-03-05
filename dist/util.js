@@ -59,7 +59,7 @@ var Util = new function () {
         };
     }();
 
-    this.loadJson = function () {
+    this.loadJsonSync = function () {
         var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(url) {
             return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
@@ -84,5 +84,7 @@ var Util = new function () {
         };
     }();
 
-    // Promise
+    this.loadJson = function (url) {
+        return $.get(url);
+    };
 }();

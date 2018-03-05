@@ -35,6 +35,7 @@ const MDS = new function () {
                 .attr('y', y - 12)
                 .attr('font-size', 10)
                 .text(axis.image);
+
             axises[axis.image] = {
                 g,
                 circle,
@@ -48,7 +49,7 @@ const MDS = new function () {
 
     this.drawNode = async function () {
         const webtoonList = (await Firebase.getInfo('/result')).val();
-        //const webtoonList = Util.loadJson('data/webtoon.json')['result2'];
+        //const webtoonList = Util.loadJsonSync('data/webtoon.json')['result2'];
 
         _.forEach(webtoonList, (webtoon, k) => {
             let xs = [] , ys = []

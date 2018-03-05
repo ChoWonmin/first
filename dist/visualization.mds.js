@@ -27,6 +27,7 @@ var MDS = new function () {
             var circle = g.append('circle').attr('cx', x).attr('cy', y).attr('r', 5).attr('stroke', '#aaa').attr('fill', 'none');
 
             var text = g.append('text').attr('alignment-baseline', 'middle').attr('text-anchor', 'middle').attr('x', x).attr('stroke', '#aaa').attr('y', y - 12).attr('font-size', 10).text(axis.image);
+
             axises[axis.image] = {
                 g: g,
                 circle: circle,
@@ -49,7 +50,7 @@ var MDS = new function () {
                     case 2:
                         webtoonList = _context.sent.val();
 
-                        //const webtoonList = Util.loadJson('data/webtoon.json')['result2'];
+                        //const webtoonList = Util.loadJsonSync('data/webtoon.json')['result2'];
 
                         _.forEach(webtoonList, function (webtoon, k) {
                             var xs = [],
