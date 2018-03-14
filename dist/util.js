@@ -83,8 +83,4 @@ var Util = new function () {
             return _ref3.apply(this, arguments);
         };
     }();
-
-    this.loadJson = function (url) {
-        return $.get(url);
-    };
 }();

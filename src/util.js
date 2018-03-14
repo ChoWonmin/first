@@ -13,6 +13,4 @@ const Util = new function () {
 
     this.loadJsonSync = async(url) => await $.get(url);
 
-    this.loadJson = url => $.get(url);
-
 };

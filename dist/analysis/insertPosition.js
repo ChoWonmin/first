@@ -22,23 +22,24 @@ _.forEach(webtoonList, function (webtoon, webtoonId) {
         var episodeTfidf = 0;
 
         _.forEach(episodeValue, function (coloring) {
-            if (coloring['tf-idf'] < 8) episodeTfidf += coloring['tf-idf'];
+            if (coloring['tf-idf'] < 30) episodeTfidf += coloring['tf-idf'];
         });
 
         var x = origin.x;
         var y = origin.y;
 
         _.forEach(episodeValue, function (coloring) {
-            if (coloring['tf-idf'] < 8) {
-                var weight = coloring['tf-idf'] / episodeTfidf * (coloring['tf-idf'] / episodeTfidf);
-                x += (coloring['x'] - origin.x) * weight * 2.5;
-                y += (coloring['y'] - origin.y) * weight * 2.5;
+            if (coloring['tf-idf'] < 30) {
+                var weight = coloring['tf-idf'] / episodeTfidf; //* (coloring['tf-idf']/episodeTfidf);
+                x += (coloring['x'] - origin.x) * weight * 1.5;
+                y += (coloring['y'] - origin.y) * weight * 1.5;
             }
         });
 
+        res[webtoonId]['episodes'][episodeId]['weight'] = episodeTfidf;
         res[webtoonId]['episodes'][episodeId]['colors'] = episodeValue;
         res[webtoonId]['episodes'][episodeId]['x'] = x;
-        res[webtoonId]['episodes'][episodeId]['y'] = Math.floor(y, 2);
+        res[webtoonId]['episodes'][episodeId]['y'] = y;
 
         xs.push(x);
         ys.push(y);
