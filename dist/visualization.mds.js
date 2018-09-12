@@ -24,6 +24,7 @@ var MDS = new function () {
             var g = root.append('g');
             var x = axis.x * ratio.x;
             var y = axis.y * ratio.y;
+
             var circle = g.append('circle').attr('cx', x).attr('cy', y).attr('r', 5).attr('stroke', '#aaa').attr('fill', 'none');
 
             var text = g.append('text').attr('alignment-baseline', 'middle').attr('text-anchor', 'middle').attr('x', x).attr('stroke', '#aaa').attr('y', y - 12).attr('font-size', 10).text(axis.image);
@@ -44,13 +45,9 @@ var MDS = new function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        _context.next = 2;
-                        return Firebase.getInfo('/result');
+                        //const webtoonList = (await Firebase.getInfo('/result')).val();
+                        webtoonList = Util.loadJsonSync('data/webtoon.json')['result2'];
 
-                    case 2:
-                        webtoonList = _context.sent.val();
-
-                        //const webtoonList = Util.loadJsonSync('data/webtoon.json')['result2'];
 
                         _.forEach(webtoonList, function (webtoon, k) {
                             var xs = [],
@@ -84,7 +81,7 @@ var MDS = new function () {
                             root.append('circle').attr('cx', _.mean(xs)).attr('cy', _.mean(ys)).attr('fill', color).attr('stroke', 'none').attr('r', 5);
                         });
 
-                    case 4:
+                    case 2:
                     case 'end':
                         return _context.stop();
                 }

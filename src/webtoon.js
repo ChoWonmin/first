@@ -88,14 +88,12 @@ const Webtoon  = new async function () {
                 $(`.compareItem[webtoon_id=${webtoon_id}]`).remove();
 
                 let ind = compareList.findIndex(r => r.webtoon_id == webtoon_id);
-                //console.log('ind',ind);
 
                 console.log(compareList[ind].webtoon_id);
-                //console.log(compareList[ind].webtoon_id);
+
                 if(compareList[ind].webtoon_id == webtoon_id)
                     console.log(compareList.splice(ind,1));
 
-                //console.log(compareList);
             });
         }
 

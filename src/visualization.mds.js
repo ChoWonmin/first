@@ -20,6 +20,8 @@ const MDS = new function () {
             const g = root.append('g');
             const x = axis.x * ratio.x;
             const y = axis.y * ratio.y;
+
+
             const circle = g.append('circle')
                 .attr('cx', x)
                 .attr('cy', y)
@@ -48,8 +50,8 @@ const MDS = new function () {
     };
 
     this.drawNode = async function () {
-        const webtoonList = (await Firebase.getInfo('/result')).val();
-        //const webtoonList = Util.loadJsonSync('data/webtoon.json')['result2'];
+        //const webtoonList = (await Firebase.getInfo('/result')).val();
+        const webtoonList = Util.loadJsonSync('data/webtoon.json')['result2'];
 
         _.forEach(webtoonList, (webtoon, k) => {
             let xs = [] , ys = []

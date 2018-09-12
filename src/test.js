@@ -25,6 +25,7 @@ const MDS = new function () {
             const g = root.append('g');
             const x = axis.x * ratio.x;
             const y = axis.y * ratio.y;
+
             const circle = g.append('circle')
                 .attr('cx', x)
                 .attr('cy', y)
@@ -80,28 +81,30 @@ const MDS = new function () {
                 .attr('cy', webtoon['y'] * ratio.y)
                 .attr('fill', color)
                 .attr('stroke', 'none')
-                .attr('r', 5)
-                .attr('webtoon_id', webtoon['webtoon_title_en']);
+                .attr('r', 6)
+                .attr('webtoon_id', webtoon['webtoon_title_en'])
+                .attr('img_url', webtoon['webtoon_thumbnail']);
         });
 
         ele = {'webtoon': eleWebtoons, 'episode': eleEpisodes};
 
     };
 
-    this.addShowEpisodeAction = function (source, dest) {
+    this.addHighlightAction = function () {
 
         _.forEach(ele['webtoon'], webtoon => {
             let line = {};
 
             webtoon.on("mouseover", function () {
 
+
                 const webtoonX = webtoon.attr('cx');
                 const webtoonY = webtoon.attr('cy');
 
-                console.log("in");
-
                 const webtoon_id = webtoon.attr('webtoon_id');
                 const epList = ele['episode'][webtoon_id];
+
+                console.log(webtoon_id);
 
                 _.forEach(ele['webtoon'], r=>{
                    r.attr('opacity',0.2);
@@ -113,6 +116,8 @@ const MDS = new function () {
                 });
 
                 webtoon.attr("opacity",1);
+
+                const color = webtoon.attr("fill");
 
                 _.forEach(epList, episode=>{
                     episode.attr('r',5);
@@ -128,38 +133,71 @@ const MDS = new function () {
                         .attr('y1',webtoonY)
                         .attr('x2',epX)
                         .attr('y2',epY)
-                        .attr('stroke-width',weight*0.3)
-                        .attr("stroke", '#fbc');
+                        .attr('stroke-width',weight*0.06)
+                        .attr("stroke", color)
+                        .attr("opacity", 0.5);
                 });
 
             });
 
             webtoon.on("mouseout", function(){
-                console.log("out", webtoon);
-
-                _.forEach(ele['webtoon'], r=>{
-                    r.attr('opacity',1);
-                });
-                _.forEach(ele['episode'], webtoon=>{
-                    _.forEach(webtoon,r=>{
-                        r.attr('opacity',0.3);
-                    });
-                });
-
-                const webtoon_id = webtoon.attr('webtoon_id');
-                const epList = ele['episode'][webtoon_id];
-
-                _.forEach(epList, episode=>{
-                    episode.attr('r',2);
-                    episode.attr('opacity',0.3);
-                });
-
-                d3.selectAll('line').remove();
-
+                that.removeHighlight(webtoon);
             });
         });
 
     };
+
+    this.addShowEpisodeAction = function () {
+        _.forEach(ele['webtoon'], webtoon => {
+
+            webtoon.on("click", function () {
+                const $webtoonItem = $('.webtoonItem');
+                $webtoonItem.children('*').remove();
+
+                const img = webtoon.attr("img_url");
+
+                $(`<div class="main-thumbnail"><img class="main-thumbnail" src=${img}></div>
+                   <div class="webtoon-name inline-block">wonmin</div>
+                   <div class="webtoon-text inline-block">wonmin</div>
+                   <div class="webtoon-text">wonmin</div>`).appendTo($webtoonItem);
+
+                $webtoonItem.css('display','block');
+
+
+                const px = $(webtoon).offset().left;
+                const py = $(webtoon).offset().top;
+
+                $webtoonItem.offset({left:px+10, top:py+10});
+
+                $webtoonItem.mouseleave(function(){
+                    $webtoonItem.css('display','none');
+                });
+
+            });
+
+        });
+    }
+
+    this.removeHighlight = function (webtoon) {
+        _.forEach(ele['webtoon'], r=>{
+            r.attr('opacity',1);
+        });
+        _.forEach(ele['episode'], webtoon=>{
+            _.forEach(webtoon,r=>{
+                r.attr('opacity',0.3);
+            });
+        });
+
+        const webtoon_id = webtoon.attr('webtoon_id');
+        const epList = ele['episode'][webtoon_id];
+
+        _.forEach(epList, episode=>{
+            episode.attr('r',2);
+            episode.attr('opacity',0.3);
+        });
+
+        d3.selectAll('line').remove();
+    }
 
     this.init = async function () {
 
@@ -177,9 +215,9 @@ const MDS = new function () {
 
         await that.drawNode();
 
-        that.addShowEpisodeAction(ele['webtoon'], ele['episode']);
-
-    };
+        that.addHighlightAction();
+        that.addShowEpisodeAction();
+    }
 };
 
 MDS.init();

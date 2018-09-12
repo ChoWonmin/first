@@ -82,13 +82,10 @@ var Webtoon = new (_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(funct
                                 var ind = compareList.findIndex(function (r) {
                                     return r.webtoon_id == webtoon_id;
                                 });
-                                //console.log('ind',ind);
 
                                 console.log(compareList[ind].webtoon_id);
-                                //console.log(compareList[ind].webtoon_id);
-                                if (compareList[ind].webtoon_id == webtoon_id) console.log(compareList.splice(ind, 1));
 
-                                //console.log(compareList);
+                                if (compareList[ind].webtoon_id == webtoon_id) console.log(compareList.splice(ind, 1));
                             });
                         }
                     });

@@ -28,6 +28,7 @@ var MDS = new function () {
             var g = root.append('g');
             var x = axis.x * ratio.x;
             var y = axis.y * ratio.y;
+
             var circle = g.append('circle').attr('cx', x).attr('cy', y).attr('r', 5).attr('stroke', '#aaa').attr('fill', 'none');
 
             var text = g.append('text').attr('alignment-baseline', 'middle').attr('text-anchor', 'middle').attr('x', x).attr('stroke', '#aaa').attr('y', y - 12).attr('font-size', 10).text(axis.image);
@@ -64,7 +65,7 @@ var MDS = new function () {
                                 return root.append('circle').attr('cx', episode['x'] * ratio.x).attr('cy', episode['y'] * ratio.y).attr('fill', color).attr('stroke', 'none').attr('r', 2).attr('opacity', 0.3).attr('webtoon_id', webtoon['webtoon_title_en']).attr('weight', episode['weight']);
                             });
 
-                            return root.append('circle').attr('cx', webtoon['x'] * ratio.x).attr('cy', webtoon['y'] * ratio.y).attr('fill', color).attr('stroke', 'none').attr('r', 5).attr('webtoon_id', webtoon['webtoon_title_en']);
+                            return root.append('circle').attr('cx', webtoon['x'] * ratio.x).attr('cy', webtoon['y'] * ratio.y).attr('fill', color).attr('stroke', 'none').attr('r', 6).attr('webtoon_id', webtoon['webtoon_title_en']).attr('img_url', webtoon['webtoon_thumbnail']);
                         });
 
 
@@ -78,7 +79,7 @@ var MDS = new function () {
         }, _callee, this);
     }));
 
-    this.addShowEpisodeAction = function (source, dest) {
+    this.addHighlightAction = function () {
 
         _.forEach(ele['webtoon'], function (webtoon) {
             var line = {};
@@ -88,10 +89,10 @@ var MDS = new function () {
                 var webtoonX = webtoon.attr('cx');
                 var webtoonY = webtoon.attr('cy');
 
-                console.log("in");
-
                 var webtoon_id = webtoon.attr('webtoon_id');
                 var epList = ele['episode'][webtoon_id];
+
+                console.log(webtoon_id);
 
                 _.forEach(ele['webtoon'], function (r) {
                     r.attr('opacity', 0.2);
@@ -104,6 +105,8 @@ var MDS = new function () {
 
                 webtoon.attr("opacity", 1);
 
+                var color = webtoon.attr("fill");
+
                 _.forEach(epList, function (episode) {
                     episode.attr('r', 5);
                     episode.attr('opacity', 1);
@@ -113,33 +116,60 @@ var MDS = new function () {
 
                     var weight = episode.attr('weight');
 
-                    line = underRoot.append('line').attr('x1', webtoonX).attr('y1', webtoonY).attr('x2', epX).attr('y2', epY).attr('stroke-width', weight * 0.3).attr("stroke", '#fbc');
+                    line = underRoot.append('line').attr('x1', webtoonX).attr('y1', webtoonY).attr('x2', epX).attr('y2', epY).attr('stroke-width', weight * 0.06).attr("stroke", color).attr("opacity", 0.5);
                 });
             });
 
             webtoon.on("mouseout", function () {
-                console.log("out", webtoon);
-
-                _.forEach(ele['webtoon'], function (r) {
-                    r.attr('opacity', 1);
-                });
-                _.forEach(ele['episode'], function (webtoon) {
-                    _.forEach(webtoon, function (r) {
-                        r.attr('opacity', 0.3);
-                    });
-                });
-
-                var webtoon_id = webtoon.attr('webtoon_id');
-                var epList = ele['episode'][webtoon_id];
-
-                _.forEach(epList, function (episode) {
-                    episode.attr('r', 2);
-                    episode.attr('opacity', 0.3);
-                });
-
-                d3.selectAll('line').remove();
+                that.removeHighlight(webtoon);
             });
         });
+    };
+
+    this.addShowEpisodeAction = function () {
+        _.forEach(ele['webtoon'], function (webtoon) {
+
+            webtoon.on("click", function () {
+                var $webtoonItem = $('.webtoonItem');
+                $webtoonItem.children('*').remove();
+
+                var img = webtoon.attr("img_url");
+
+                $('<div class="main-thumbnail"><img class="main-thumbnail" src=' + img + '></div>\n                   <div class="webtoon-name inline-block">wonmin</div>\n                   <div class="webtoon-text inline-block">wonmin</div>\n                   <div class="webtoon-text">wonmin</div>').appendTo($webtoonItem);
+
+                $webtoonItem.css('display', 'block');
+
+                var px = $(webtoon).offset().left;
+                var py = $(webtoon).offset().top;
+
+                $webtoonItem.offset({ left: px + 10, top: py + 10 });
+
+                $webtoonItem.mouseleave(function () {
+                    $webtoonItem.css('display', 'none');
+                });
+            });
+        });
+    };
+
+    this.removeHighlight = function (webtoon) {
+        _.forEach(ele['webtoon'], function (r) {
+            r.attr('opacity', 1);
+        });
+        _.forEach(ele['episode'], function (webtoon) {
+            _.forEach(webtoon, function (r) {
+                r.attr('opacity', 0.3);
+            });
+        });
+
+        var webtoon_id = webtoon.attr('webtoon_id');
+        var epList = ele['episode'][webtoon_id];
+
+        _.forEach(epList, function (episode) {
+            episode.attr('r', 2);
+            episode.attr('opacity', 0.3);
+        });
+
+        d3.selectAll('line').remove();
     };
 
     this.init = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
@@ -171,9 +201,10 @@ var MDS = new function () {
 
                     case 10:
 
-                        that.addShowEpisodeAction(ele['webtoon'], ele['episode']);
+                        that.addHighlightAction();
+                        that.addShowEpisodeAction();
 
-                    case 11:
+                    case 12:
                     case 'end':
                         return _context2.stop();
                 }
