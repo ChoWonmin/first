@@ -56,7 +56,6 @@ const MDS = new function () {
         let webtoonList = await Util.loadJsonSync('data/webtoon-result.json');
 
         let eleEpisodes = {};
-        console.log('webtoonList', webtoonList);
 
         const eleWebtoons = _.map(webtoonList, webtoon => {
             const color = d3.rgb(Math.random() * 150 + 50,
@@ -197,6 +196,14 @@ const MDS = new function () {
         });
 
         d3.selectAll('line').remove();
+    }
+
+    this.addHoverAction = function () {
+        _.forEach(ele['webtoon'], webtoon => {
+            webtoon.on('mouseover', function() {
+                console.log(this);
+            });
+        });
     }
 
     this.init = async function () {

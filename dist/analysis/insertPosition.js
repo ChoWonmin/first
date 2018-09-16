@@ -22,17 +22,17 @@ _.forEach(webtoonList, function (webtoon, webtoonId) {
         var episodeTfidf = 0;
 
         _.forEach(episodeValue, function (coloring) {
-            if (coloring['tf-idf'] < 30) episodeTfidf += coloring['tf-idf'];
+            if (coloring['tf-idf'] < 50) episodeTfidf += coloring['tf-idf'];
         });
 
         var x = origin.x;
         var y = origin.y;
 
         _.forEach(episodeValue, function (coloring) {
-            if (coloring['tf-idf'] < 30) {
+            if (coloring['tf-idf'] < 50) {
                 var weight = coloring['tf-idf'] / episodeTfidf; //* (coloring['tf-idf']/episodeTfidf);
-                x += (coloring['x'] - origin.x) * weight * 1.5;
-                y += (coloring['y'] - origin.y) * weight * 1.5;
+                x += (coloring['x'] - origin.x) * weight * 1.3;
+                y += (coloring['y'] - origin.y) * weight * 1.3;
             }
         });
 

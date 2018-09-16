@@ -54,9 +54,6 @@ var MDS = new function () {
                     case 2:
                         webtoonList = _context.sent;
                         eleEpisodes = {};
-
-                        console.log('webtoonList', webtoonList);
-
                         eleWebtoons = _.map(webtoonList, function (webtoon) {
                             var color = d3.rgb(Math.random() * 150 + 50, Math.random() * 150 + 50, Math.random() * 150 + 50);
 
@@ -71,7 +68,7 @@ var MDS = new function () {
 
                         ele = { 'webtoon': eleWebtoons, 'episode': eleEpisodes };
 
-                    case 7:
+                    case 6:
                     case 'end':
                         return _context.stop();
                 }
@@ -170,6 +167,14 @@ var MDS = new function () {
         });
 
         d3.selectAll('line').remove();
+    };
+
+    this.addHoverAction = function () {
+        _.forEach(ele['webtoon'], function (webtoon) {
+            webtoon.on('mouseover', function () {
+                console.log(this);
+            });
+        });
     };
 
     this.init = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
