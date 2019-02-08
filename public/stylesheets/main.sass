@@ -15,6 +15,37 @@ $radar-size : 350px
   height : 100%
   border : solid 1px #aaa
 
+.info-wrapper
+  position: fixed
+  bottom: 24px
+  left: 48px
+  color: #062546
+  display: flex
+  align-items: flex-end
+  .info
+    display: none
+    background-color: #fefefe
+    width: 1040px
+    height: 620px
+    .image
+      display: none
+  &:hover
+    .info
+      display: flex
+      justify-content: center
+      flex-direction: column
+      .title
+        text-align: center
+        line-height: 58px
+        height: 58px
+        font-size: 24px
+        color: #062546
+      .image
+        display: block
+
+
+
+
 .nav
   height : $nav-height
 

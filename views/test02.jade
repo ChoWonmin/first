@@ -3,18 +3,23 @@ block content
 
     link(href='/stylesheets/main.css' , rel='stylesheet')
 
+    .info-wrapper
+        i.material-icons info
+        .info
+            .title Color Image Scale
+            img(src="/images/map.png").image
     .nav
     .main-page
         .mds.cell
             svg.zone#mds
-        //.subview
-        //    .radar.cell
-        //        .zone
-        //    .webtoon-infos
-        //        .webtoon-list.cell
-        //            .zone
-        //        .color-list.cell
-        //            .zone
+        .subview
+            .radar.cell
+                .zone
+            .webtoon-infos
+                .webtoon-list.cell
+                    .zone
+                .color-list.cell
+                    .zone
 
     .webtoonitem
 
