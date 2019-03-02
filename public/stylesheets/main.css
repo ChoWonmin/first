@@ -52,35 +52,29 @@ body {
   .main-page .subview {
     width: 350px;
     height: 100%; }
-    .main-page .subview .radar {
-      height: 350px; }
     .main-page .subview .webtoon-infos {
-      height: calc(100% - 350px);
+      height: 100%;
       display: flex; }
       .main-page .subview .webtoon-infos .webtoon-list {
         height: 100%;
         flex: 1; }
-      .main-page .subview .webtoon-infos .color-list {
-        height: 100%;
-        flex: 1; }
 
-.webtoonItem {
+.webtoonitem {
   background-color: #fefefe;
   width: 224px;
-  display: none;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   position: absolute;
   border-radius: 4px;
   padding: 4px; }
-  .webtoonItem .main-thumbnail {
+  .webtoonitem .main-thumbnail {
     width: 190px;
     height: 130px; }
-  .webtoonItem .webtoon-name {
+  .webtoonitem .webtoon-name {
     width: 100%;
     padding: 9px 0 3px;
     font-size: 14px;
     letter-spacing: -0.02em; }
-  .webtoonItem .webtoon-text {
+  .webtoonitem .webtoon-text {
     width: 100%;
     line-height: 1.5;
     font-size: 12px;

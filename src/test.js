@@ -103,8 +103,6 @@ const MDS = new function () {
                 const webtoon_id = webtoon.attr('webtoon_id');
                 const epList = ele['episode'][webtoon_id];
 
-                console.log(webtoon_id);
-
                 _.forEach(ele['webtoon'], r=>{
                    r.attr('opacity',0.2);
                 });
@@ -147,13 +145,16 @@ const MDS = new function () {
     };
 
     this.addShowEpisodeAction = function () {
+
         _.forEach(ele['webtoon'], webtoon => {
 
             webtoon.on("click", function () {
-                const $webtoonItem = $('.webtoonItem');
+                const $webtoonItem = $('.webtoonitem');
                 $webtoonItem.children('*').remove();
 
                 const img = webtoon.attr("img_url");
+
+                console.log($webtoonItem, img);
 
                 $(`<div class="main-thumbnail"><img class="main-thumbnail" src=${img}></div>
                    <div class="webtoon-name inline-block">wonmin</div>
@@ -162,15 +163,16 @@ const MDS = new function () {
 
                 $webtoonItem.css('display','block');
 
+                const px = $(this).offset().left;
+                const py = $(this).offset().top;
 
-                const px = $(webtoon).offset().left;
-                const py = $(webtoon).offset().top;
+                console.log(px, py);
 
                 $webtoonItem.offset({left:px+10, top:py+10});
 
-                $webtoonItem.mouseleave(function(){
-                    $webtoonItem.css('display','none');
-                });
+                // $webtoonItem.mouseleave(function(){
+                //     $webtoonItem.css('display','none');
+                // });
 
             });
 
@@ -217,13 +219,13 @@ const MDS = new function () {
         ratio.x = width / maxX;
         ratio.y = height / maxY;
 
-
         that.drawAxis();
 
         await that.drawNode();
 
         that.addHighlightAction();
         that.addShowEpisodeAction();
+
     }
 };
 

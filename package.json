@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build": "babel ./src --out-dir ./dist --watch"
+    "babel": "babel ./src --out-dir ./dist --watch",
+    "build": "babel ./src --out-dir ./dist"
   },
   "babel": {
     "presets": [

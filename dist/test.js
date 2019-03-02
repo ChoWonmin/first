@@ -89,8 +89,6 @@ var MDS = new function () {
                 var webtoon_id = webtoon.attr('webtoon_id');
                 var epList = ele['episode'][webtoon_id];
 
-                console.log(webtoon_id);
-
                 _.forEach(ele['webtoon'], function (r) {
                     r.attr('opacity', 0.2);
                 });
@@ -124,26 +122,31 @@ var MDS = new function () {
     };
 
     this.addShowEpisodeAction = function () {
+
         _.forEach(ele['webtoon'], function (webtoon) {
 
             webtoon.on("click", function () {
-                var $webtoonItem = $('.webtoonItem');
+                var $webtoonItem = $('.webtoonitem');
                 $webtoonItem.children('*').remove();
 
                 var img = webtoon.attr("img_url");
+
+                console.log($webtoonItem, img);
 
                 $('<div class="main-thumbnail"><img class="main-thumbnail" src=' + img + '></div>\n                   <div class="webtoon-name inline-block">wonmin</div>\n                   <div class="webtoon-text inline-block">wonmin</div>\n                   <div class="webtoon-text">wonmin</div>').appendTo($webtoonItem);
 
                 $webtoonItem.css('display', 'block');
 
-                var px = $(webtoon).offset().left;
-                var py = $(webtoon).offset().top;
+                var px = $(this).offset().left;
+                var py = $(this).offset().top;
+
+                console.log(px, py);
 
                 $webtoonItem.offset({ left: px + 10, top: py + 10 });
 
-                $webtoonItem.mouseleave(function () {
-                    $webtoonItem.css('display', 'none');
-                });
+                // $webtoonItem.mouseleave(function(){
+                //     $webtoonItem.css('display','none');
+                // });
             });
         });
     };
