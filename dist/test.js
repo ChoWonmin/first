@@ -53,22 +53,25 @@ var MDS = new function () {
 
                     case 2:
                         webtoonList = _context.sent;
+
+                        console.log(webtoonList);
+
                         eleEpisodes = {};
                         eleWebtoons = _.map(webtoonList, function (webtoon) {
                             var color = d3.rgb(Math.random() * 150 + 50, Math.random() * 150 + 50, Math.random() * 150 + 50);
 
                             eleEpisodes[webtoon['webtoon_title_en']] = _.map(webtoon['episodes'], function (episode) {
 
-                                return root.append('circle').attr('cx', episode['x'] * ratio.x).attr('cy', episode['y'] * ratio.y).attr('fill', color).attr('stroke', 'none').attr('r', 2).attr('opacity', 0.3).attr('webtoon_id', webtoon['webtoon_title_en']).attr('weight', episode['weight']);
+                                return root.append('circle').attr('cx', episode['x'] * ratio.x).attr('cy', episode['y'] * ratio.y).attr('fill', color).attr('stroke', 'none').attr('r', 2).attr('opacity', 0.3).attr('webtoon_id', webtoon['webtoon_title_ko']).attr('weight', episode['weight']);
                             });
 
-                            return root.append('circle').attr('cx', webtoon['x'] * ratio.x).attr('cy', webtoon['y'] * ratio.y).attr('fill', color).attr('stroke', 'none').attr('r', 6).attr('webtoon_id', webtoon['webtoon_title_en']).attr('img_url', webtoon['webtoon_thumbnail']);
+                            return root.append('circle').attr('cx', webtoon['x'] * ratio.x).attr('cy', webtoon['y'] * ratio.y).attr('fill', color).attr('stroke', 'none').attr('r', 6).attr('webtoon_id', webtoon['webtoon_title_ko']).attr('webtoon_writer', webtoon['webtoon_writer_ko']).attr('webtoon_intro', webtoon['webtoon_intro_en']).attr('img_url', webtoon['webtoon_thumbnail']);
                         });
 
 
                         ele = { 'webtoon': eleWebtoons, 'episode': eleEpisodes };
 
-                    case 6:
+                    case 7:
                     case 'end':
                         return _context.stop();
                 }
@@ -131,9 +134,7 @@ var MDS = new function () {
 
                 var img = webtoon.attr("img_url");
 
-                console.log($webtoonItem, img);
-
-                $('<div class="main-thumbnail"><img class="main-thumbnail" src=' + img + '></div>\n                   <div class="webtoon-name inline-block">wonmin</div>\n                   <div class="webtoon-text inline-block">wonmin</div>\n                   <div class="webtoon-text">wonmin</div>').appendTo($webtoonItem);
+                $('<div class="main-thumbnail"><img class="main-thumbnail" src=' + img + '></div>\n                   <div class="webtoon-name inline-block">' + webtoon.attr("webtoon_id") + '</div>\n                   <div class="webtoon-text inline-block">' + webtoon.attr("webtoon_writer") + '</div>\n                   <div class="webtoon-text">' + webtoon.attr("webtoon_intro") + '</div>').appendTo($webtoonItem);
 
                 $webtoonItem.css('display', 'block');
 
@@ -212,7 +213,9 @@ var MDS = new function () {
                         that.addHighlightAction();
                         that.addShowEpisodeAction();
 
-                    case 12:
+                        console.log(ele);
+
+                    case 13:
                     case 'end':
                         return _context2.stop();
                 }

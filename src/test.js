@@ -54,6 +54,7 @@ const MDS = new function () {
 
     this.drawNode = async function () {
         let webtoonList = await Util.loadJsonSync('data/webtoon-result.json');
+        console.log(webtoonList);
 
         let eleEpisodes = {};
 
@@ -71,7 +72,7 @@ const MDS = new function () {
                     .attr('stroke', 'none')
                     .attr('r', 2)
                     .attr('opacity', 0.3)
-                    .attr('webtoon_id', webtoon['webtoon_title_en'])
+                    .attr('webtoon_id', webtoon['webtoon_title_ko'])
                     .attr('weight',episode['weight']);
             });
 
@@ -81,7 +82,9 @@ const MDS = new function () {
                 .attr('fill', color)
                 .attr('stroke', 'none')
                 .attr('r', 6)
-                .attr('webtoon_id', webtoon['webtoon_title_en'])
+                .attr('webtoon_id', webtoon['webtoon_title_ko'])
+                .attr('webtoon_writer', webtoon['webtoon_writer_ko'])
+                .attr('webtoon_intro', webtoon['webtoon_intro_en'])
                 .attr('img_url', webtoon['webtoon_thumbnail']);
         });
 
@@ -154,12 +157,10 @@ const MDS = new function () {
 
                 const img = webtoon.attr("img_url");
 
-                console.log($webtoonItem, img);
-
                 $(`<div class="main-thumbnail"><img class="main-thumbnail" src=${img}></div>
-                   <div class="webtoon-name inline-block">wonmin</div>
-                   <div class="webtoon-text inline-block">wonmin</div>
-                   <div class="webtoon-text">wonmin</div>`).appendTo($webtoonItem);
+                   <div class="webtoon-name inline-block">${webtoon.attr("webtoon_id")}</div>
+                   <div class="webtoon-text inline-block">${webtoon.attr("webtoon_writer")}</div>
+                   <div class="webtoon-text">${webtoon.attr("webtoon_intro")}</div>`).appendTo($webtoonItem);
 
                 $webtoonItem.css('display','block');
 
@@ -225,6 +226,8 @@ const MDS = new function () {
 
         that.addHighlightAction();
         that.addShowEpisodeAction();
+
+        console.log(ele);
 
     }
 };
