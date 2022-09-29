@@ -17,7 +17,7 @@
     "babel-preset-env": "^1.6.1",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
-    "d3": "^4.12.2",
+    "d3": "^7.6.1",
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "fs": "0.0.1-security",
